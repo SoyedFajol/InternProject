@@ -1,6 +1,5 @@
 # Daily Report — 16/04/2024
-
-** Name: ** Solaman Fajul
+ Name: Soyed Md. Solaman Fajul
 
 ---
 
