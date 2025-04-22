@@ -1,4 +1,4 @@
-#  Prepared by: Soyed Md. Solaman Fajul  
+#  Soyed Md. Solaman Fajul  
 #  Date: 18 April 2025
 
 ##  Task 01: Java Basics, Spring Boot Intro & HackerRank Practice
