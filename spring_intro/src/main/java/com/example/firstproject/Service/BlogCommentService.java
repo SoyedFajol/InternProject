@@ -1,10 +1,11 @@
 package com.example.firstproject.Service;
 
-import com.example.firstproject.DTO.BlogCommentDTO;
-import com.example.firstproject.Entity.BlogComment;
-import com.example.firstproject.Entity.Book;
-import com.example.firstproject.Mapper.BlogCommentMapper;
+import com.example.firstproject.Model.Entity.DTO.BlogCommentDTO;
+import com.example.firstproject.Model.Entity.BlogComment;
+import com.example.firstproject.Model.Entity.Book;
+import com.example.firstproject.Model.Entity.Mapper.BlogCommentMapper;
 import com.example.firstproject.Repository.BlogCommentRepository;
+import com.example.firstproject.Repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,17 +16,22 @@ public class BlogCommentService {
 
     private final BlogCommentRepository repository;
     private final BlogCommentMapper mapper;
+    private final BookRepository bookRepository;
 
-    public BlogCommentService(BlogCommentRepository repository, BlogCommentMapper mapper) {
+    public BlogCommentService(BlogCommentRepository repository, BlogCommentMapper mapper, BookRepository bookRepository) {
         this.repository = repository;
         this.mapper = mapper;
+        this.bookRepository = bookRepository;
     }
 
-    public void save(BlogCommentDTO dto) {
-        // Implement Book fetching logic here
-        Book viewer = new Book();
-        BlogComment comment = mapper.toEntity(dto, viewer);
-        repository.save(comment);
+    public boolean save(BlogCommentDTO dto) {
+        Optional<Book> bookOpt = bookRepository.findById(dto.getBookId());
+        if (bookOpt.isPresent()) {
+            BlogComment comment = mapper.toEntity(dto, bookOpt.get());
+            repository.save(comment);
+            return true;
+        }
+        return false;
     }
 
     public List<BlogCommentDTO> getAll() {
@@ -38,11 +44,11 @@ public class BlogCommentService {
     }
 
     public boolean update(Long id, BlogCommentDTO dto) {
-        Optional<BlogComment> comment = repository.findById(id);
-        if (comment.isPresent()) {
-            BlogComment updatedComment = comment.get();
-            updatedComment.setComment(dto.getComment());
-            repository.save(updatedComment);
+        Optional<BlogComment> commentOpt = repository.findById(id);
+        if (commentOpt.isPresent()) {
+            BlogComment comment = commentOpt.get();
+            comment.setComment(dto.getComment());
+            repository.save(comment);
             return true;
         }
         return false;

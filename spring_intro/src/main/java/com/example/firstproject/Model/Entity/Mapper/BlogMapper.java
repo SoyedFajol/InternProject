@@ -1,7 +1,7 @@
-package com.example.firstproject.Mapper;
+package com.example.firstproject.Model.Entity.Mapper;
 
-import com.example.firstproject.DTO.BlogDTO;
-import com.example.firstproject.Entity.Blog;
+import com.example.firstproject.Model.Entity.DTO.BlogDTO;
+import com.example.firstproject.Model.Entity.Blog;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,6 +18,8 @@ public class BlogMapper {
         BlogDTO dto = new BlogDTO();
         dto.setTitle(blog.getTitle());
         dto.setContent(blog.getContent());
+        dto.setCreatedAt(blog.getCreatedAt());
+        dto.setUpdatedAt(blog.getUpdatedAt());
         return dto;
     }
 }

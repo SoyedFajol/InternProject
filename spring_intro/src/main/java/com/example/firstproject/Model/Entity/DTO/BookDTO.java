@@ -1,4 +1,4 @@
-package com.example.firstproject.DTO;
+package com.example.firstproject.Model.Entity.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

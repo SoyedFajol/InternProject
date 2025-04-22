@@ -1,6 +1,6 @@
 package com.example.firstproject.Controller;
 
-import com.example.firstproject.DTO.BookDTO;
+import com.example.firstproject.Model.Entity.DTO.BookDTO;
 import com.example.firstproject.Service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

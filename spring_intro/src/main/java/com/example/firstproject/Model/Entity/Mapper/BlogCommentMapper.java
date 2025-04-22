@@ -1,8 +1,8 @@
-package com.example.firstproject.Mapper;
+package com.example.firstproject.Model.Entity.Mapper;
 
-import com.example.firstproject.DTO.BlogCommentDTO;
-import com.example.firstproject.Entity.BlogComment;
-import com.example.firstproject.Entity.Book;
+import com.example.firstproject.Model.Entity.DTO.BlogCommentDTO;
+import com.example.firstproject.Model.Entity.BlogComment;
+import com.example.firstproject.Model.Entity.Book;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,6 +18,7 @@ public class BlogCommentMapper {
     public BlogCommentDTO toDTO(BlogComment entity) {
         BlogCommentDTO dto = new BlogCommentDTO();
         dto.setComment(entity.getComment());
+        dto.setBookId(entity.getViewer().getId());
         return dto;
     }
 }

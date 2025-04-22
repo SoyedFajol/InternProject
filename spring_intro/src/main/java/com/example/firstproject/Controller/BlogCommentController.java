@@ -1,6 +1,6 @@
 package com.example.firstproject.Controller;
 
-import com.example.firstproject.DTO.BlogCommentDTO;
+import com.example.firstproject.Model.Entity.DTO.BlogCommentDTO;
 import com.example.firstproject.Service.BlogCommentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +19,11 @@ public class BlogCommentController {
 
     @PostMapping("/create")
     public ResponseEntity<String> createComment(@RequestBody BlogCommentDTO blogCommentDTO) {
-        blogCommentService.save(blogCommentDTO);
-        return ResponseEntity.ok("Comment created successfully");
+        if (blogCommentService.save(blogCommentDTO)) {
+            return ResponseEntity.ok("Comment created successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Book not found with given ID");
+        }
     }
 
     @GetMapping

@@ -1,4 +1,4 @@
-package com.example.firstproject.DTO;
+package com.example.firstproject.Model.Entity.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -6,6 +6,9 @@ import lombok.Data;
 @Data
 public class BlogCommentDTO {
 
-    @JsonProperty(value = "blog_comment", required = true, defaultValue = "Write here comments...")
+    @JsonProperty("comment")
     private String comment;
+
+    @JsonProperty("book_id")
+    private Long bookId;
 }

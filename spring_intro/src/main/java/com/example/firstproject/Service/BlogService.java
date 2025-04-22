@@ -1,8 +1,8 @@
 package com.example.firstproject.Service;
 
-import com.example.firstproject.DTO.BlogDTO;
-import com.example.firstproject.Entity.Blog;
-import com.example.firstproject.Mapper.BlogMapper;
+import com.example.firstproject.Model.Entity.DTO.BlogDTO;
+import com.example.firstproject.Model.Entity.Blog;
+import com.example.firstproject.Model.Entity.Mapper.BlogMapper;
 import com.example.firstproject.Repository.BlogRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.example.firstproject.Mapper;
+package com.example.firstproject.Model.Entity.Mapper;
 
-import com.example.firstproject.DTO.BookDTO;
-import com.example.firstproject.Entity.Book;
+import com.example.firstproject.Model.Entity.DTO.BookDTO;
+import com.example.firstproject.Model.Entity.Book;
 import org.springframework.stereotype.Component;
 
 @Component
