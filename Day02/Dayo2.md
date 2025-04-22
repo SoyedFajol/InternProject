@@ -1,3 +1,7 @@
+##Soyed Md. Solaman Fajul
+
+###15/04/2025
+
 # Encapsulation
 
 1. **Overview** – Encapsulation means hiding internal data and exposing access via methods, ensuring clean and secure code design.
