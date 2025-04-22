@@ -1,4 +1,4 @@
-  #  Daily Task - 17 April & 18 April
+  #  Daily Task - 17 April 
 
   ## Soyed Md. Solaman Fajul
 
