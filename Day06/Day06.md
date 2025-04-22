@@ -1,10 +1,11 @@
-# Learn Cascade and Fetch Types in Spring Boot
+
 
 ## Date: 20th April 2025
 
 ## Soyed Md. Solaman Fajul
 ## Name: Learn Cascade, Cascade Types, @Column, Fetch Type, Difference, and Extend the Project
 
+# Learn Cascade and Fetch Types in Spring Boot
 ### 1. Cascade Types in JPA
 
 Cascade operations are used to propagate certain actions from a parent entity to related entities. For example, if you delete a `Blog` post, you may want to delete its associated `BlogComment` entities as well.
