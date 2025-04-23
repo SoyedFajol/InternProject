@@ -1,7 +1,7 @@
-package com.example.firstproject.Controller;
+package com.example.firstproject.controller;
 
-import com.example.firstproject.Model.Entity.DTO.BlogDTO;
-import com.example.firstproject.Service.BlogService;
+import com.example.firstproject.model.dto.BlogDTO;
+import com.example.firstproject.service.BlogService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

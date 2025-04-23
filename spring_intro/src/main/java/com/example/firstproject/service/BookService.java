@@ -1,9 +1,9 @@
-package com.example.firstproject.Service;
+package com.example.firstproject.service;
 
-import com.example.firstproject.Model.Entity.DTO.BookDTO;
-import com.example.firstproject.Model.Entity.Book;
-import com.example.firstproject.Model.Entity.Mapper.BookMapper;
-import com.example.firstproject.Repository.BookRepository;
+import com.example.firstproject.model.dto.BookDTO;
+import com.example.firstproject.model.entity.Book;
+import com.example.firstproject.model.mapper.BookMapper;
+import com.example.firstproject.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +38,6 @@ public class BookService {
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();
             book.setName(dto.getName());
-            book.setAuthor(dto.getAuthor());
             repository.save(book);
         }
     }

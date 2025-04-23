@@ -1,9 +1,11 @@
-package com.example.firstproject.Service;
+package com.example.firstproject.service;
 
-import com.example.firstproject.Model.Entity.DTO.BlogDTO;
-import com.example.firstproject.Model.Entity.Blog;
-import com.example.firstproject.Model.Entity.Mapper.BlogMapper;
-import com.example.firstproject.Repository.BlogRepository;
+import com.example.firstproject.model.dto.BlogDTO;
+import com.example.firstproject.model.entity.Blog;
+import com.example.firstproject.model.entity.User;
+import com.example.firstproject.model.mapper.BlogMapper;
+import com.example.firstproject.repository.BlogRepository;
+import com.example.firstproject.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +16,32 @@ public class BlogService {
 
     private final BlogRepository blogRepository;
     private final BlogMapper blogMapper;
+    private final UserRepository userRepository;
+    private final UserRoleService roleService;
 
-    public BlogService(BlogRepository blogRepository, BlogMapper blogMapper) {
+    public BlogService(BlogRepository blogRepository, BlogMapper blogMapper,
+                       UserRepository userRepository, UserRoleService roleService) {
         this.blogRepository = blogRepository;
         this.blogMapper = blogMapper;
+        this.userRepository = userRepository;
+        this.roleService = roleService;
     }
 
-    public void save(BlogDTO blogDTO) {
-        Blog blog = blogMapper.toEntity(blogDTO);
+    public String save(BlogDTO dto) {
+        Optional<User> user = userRepository.findById(dto.getAuthorUserId());
+        if (user.isEmpty()) {
+            return "User not found with given ID";
+        }
+
+        if (!roleService.isCreateBlogAccessAuthority(dto.getAuthorUserId())) {
+            return "You are not authorized to create a blog";
+        }
+
+        Blog blog = blogMapper.toEntity(dto);
+        blog.setAuthor(user.get());
+
         blogRepository.save(blog);
+        return "Blog created successfully";
     }
 
     public List<BlogDTO> getAll() {

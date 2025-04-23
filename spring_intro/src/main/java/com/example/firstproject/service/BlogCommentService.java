@@ -1,11 +1,11 @@
-package com.example.firstproject.Service;
+package com.example.firstproject.service;
 
-import com.example.firstproject.Model.Entity.DTO.BlogCommentDTO;
-import com.example.firstproject.Model.Entity.BlogComment;
-import com.example.firstproject.Model.Entity.Book;
-import com.example.firstproject.Model.Entity.Mapper.BlogCommentMapper;
-import com.example.firstproject.Repository.BlogCommentRepository;
-import com.example.firstproject.Repository.BookRepository;
+import com.example.firstproject.model.dto.BlogCommentDTO;
+import com.example.firstproject.model.entity.BlogComment;
+import com.example.firstproject.model.entity.Book;
+import com.example.firstproject.model.mapper.BlogCommentMapper;
+import com.example.firstproject.repository.BlogCommentRepository;
+import com.example.firstproject.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

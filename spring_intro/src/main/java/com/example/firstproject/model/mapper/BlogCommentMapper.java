@@ -1,8 +1,8 @@
-package com.example.firstproject.Model.Entity.Mapper;
+package com.example.firstproject.model.mapper;
 
-import com.example.firstproject.Model.Entity.DTO.BlogCommentDTO;
-import com.example.firstproject.Model.Entity.BlogComment;
-import com.example.firstproject.Model.Entity.Book;
+import com.example.firstproject.model.dto.BlogCommentDTO;
+import com.example.firstproject.model.entity.BlogComment;
+import com.example.firstproject.model.entity.Book;
 import org.springframework.stereotype.Component;
 
 @Component

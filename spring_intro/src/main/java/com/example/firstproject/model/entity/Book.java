@@ -1,4 +1,4 @@
-package com.example.firstproject.Model.Entity;
+package com.example.firstproject.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,5 +17,5 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String author;
+
 }

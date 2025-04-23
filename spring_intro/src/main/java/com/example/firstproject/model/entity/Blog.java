@@ -1,4 +1,4 @@
-package com.example.firstproject.Model.Entity;
+package com.example.firstproject.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,6 +21,10 @@ public class Blog {
     @Column(nullable = false)
     private String title;
 
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
@@ -39,4 +43,6 @@ public class Blog {
     public void preUpdate() {
         updatedAt = LocalDateTime.now();
     }
+
+    private Double rating;
 }

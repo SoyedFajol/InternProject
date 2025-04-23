@@ -1,4 +1,4 @@
-package com.example.firstproject.Model.Entity.DTO;
+package com.example.firstproject.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BookDTO {
     private String name;
-    private String author;
+
 }
