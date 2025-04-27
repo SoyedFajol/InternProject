@@ -30,14 +30,10 @@ public class UserController {
                 roleService.accessAuthority(userId, "AUTHOR");
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> save(@RequestBody UserDTO dto) {
-        if (hasRequiredRole(dto.getId())) {
-            userService.save(dto);
-            return ResponseEntity.ok("User saved successfully");
-        } else {
-            return new ResponseEntity<>("You don't have permission to save user", HttpStatus.FORBIDDEN);
-        }
+     userService.save(dto);
+     return ResponseEntity.ok("User saved successfully");
     }
 
     @GetMapping("/{id}")

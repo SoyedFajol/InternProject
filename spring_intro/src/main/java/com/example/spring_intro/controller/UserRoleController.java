@@ -17,7 +17,7 @@ public class UserRoleController {
         this.userRoleService = userRoleService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> save(@RequestBody UserRoleDTO dto) {
         String response = userRoleService.save(dto);
         return ResponseEntity.ok(response);

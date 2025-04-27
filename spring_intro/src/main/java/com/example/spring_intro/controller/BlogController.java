@@ -18,7 +18,7 @@ public class BlogController {
         this.blogService = blogService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> save(@RequestBody BlogDTO dto) {
         blogService.save(dto);
         return ResponseEntity.ok("Blog saved successfully");

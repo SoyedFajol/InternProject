@@ -17,7 +17,7 @@ public class BlogCommentController {
         this.blogCommentService = blogCommentService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> save(@RequestBody BlogCommentDTO dto,
                                        @RequestParam Long viewerId,
                                        @RequestParam Long blogId) {
