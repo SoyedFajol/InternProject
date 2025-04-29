@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>User Dashboard</title>
+
+</head>
+<body>
+<div class="dashboard-container">
+
+    <header>
+        <h1>Welcome, <span th:text="${user.username}">User</span>!</h1>
+        <div class="user-info">
+            <p>Email: <span th:text="${user.email}">email@example.com</span></p>
+            <p>Phone: <span th:text="${user.phone}">+1234567890</span></p>
+        </div>
+    </header>
+
+    <section class="roles-section">
+        <h2>Your Roles</h2>
+        <ul class="roles-list">
+            <li th:each="role : ${roles}" th:text="${role.name}">ROLE_USER</li>
+        </ul>
+    </section>
+
+
+    <div sec:authorize="hasRole('USER')" class="user-features">
+        <h3>User Features</h3>
+        <p>Access basic content and features</p>
+    </div>
+
+    <div sec:authorize="hasRole('MODERATOR')" class="moderator-features">
+        <h3>Moderator Tools</h3>
+        <a href="/moderator/content-review">Content Review Panel</a>
+    </div>
+
+    <div sec:authorize="hasRole('CO_ADMIN')" class="coadmin-features">
+        <h3>Co-Admin Tools</h3>
+        <a href="/co-admin/user-management">User Management</a>
+    </div>
+
+
+    <div class="actions">
+        <a href="/blogs" class="btn">View Blogs</a>
+        <a href="/logout" class="btn logout">Logout</a>
+    </div>
+</div>
+</body>
+</html>
