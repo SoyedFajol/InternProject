@@ -17,18 +17,20 @@ public class BlogMapper {
 
     public Blog toEntity(BlogDTO dto) {
         Blog blog = new Blog();
-        blog.setId(dto.getId());
+        if (dto.getId() != null && dto.getId() != 0) {
+            blog.setId(dto.getId());
+        }
         blog.setTitle(dto.getTitle());
         blog.setContent(dto.getContent());
         blog.setRating(dto.getRating());
         User user = userService.findById(dto.getAuthorUserId());
-        if(user != null) {
+        if (user != null) {
             blog.setAuthor(user);
-        }else
-        {
-            throw new IllegalArgumentException("User not found");
+        } else {
+            throw new IllegalArgumentException("User not found with ID: " + dto.getAuthorUserId());
         }
         return blog;
+
     }
 
     public BlogDTO toDTO(Blog blog) {
@@ -43,4 +45,5 @@ public class BlogMapper {
 
         return dto;
     }
+
 }

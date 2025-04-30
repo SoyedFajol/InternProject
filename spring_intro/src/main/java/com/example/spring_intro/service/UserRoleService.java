@@ -22,7 +22,6 @@ public class UserRoleService {
      private final UserRoleMapper userRoleMapper;
      private final UserRepository userRepository;
 
-
      public String save(UserRoleDTO dto) {
           try {
                List<User> users = userRepository.findAllById(dto.getUserId());
@@ -37,17 +36,17 @@ public class UserRoleService {
           }
      }
 
-
      public String setRole(UserRoleDTO roleDto) {
           try {
                List<User> users = userRepository.findAllById(roleDto.getUserId());
                if (users.isEmpty()) {
                     return "Users not found with ids: " + roleDto.getUserId();
                }
-               UserRole userRole = userRoleRepository.findByRoleName(roleDto.getRoleName());
-               if (userRole == null) {
+               Optional<UserRole> optionalUserRole = userRoleRepository.findByRoleName(roleDto.getRoleName());
+               if (optionalUserRole.isEmpty()) {
                     return "Role not found with name: " + roleDto.getRoleName();
                }
+               UserRole userRole = optionalUserRole.get();
                Set<User> updatedUserSet = userRole.getUsers();
                if (updatedUserSet == null) {
                     updatedUserSet = new HashSet<>();
@@ -70,19 +69,20 @@ public class UserRoleService {
      }
 
      public UserRoleDTO findByRoleName(String roleName) {
-          UserRole userRole = userRoleRepository.findByRoleName(roleName);
-          if (userRole == null) {
+          Optional<UserRole> optionalUserRole = userRoleRepository.findByRoleName(roleName);
+          if (optionalUserRole.isEmpty()) {
                return null;
           }
-          return userRoleMapper.toDTO(userRole);
+          return userRoleMapper.toDTO(optionalUserRole.get());
      }
 
      public String updateRole(String roleName, UserRoleDTO dto) {
           try {
-               UserRole userRole = userRoleRepository.findByRoleName(roleName);
-               if (userRole == null) {
+               Optional<UserRole> optionalUserRole = userRoleRepository.findByRoleName(roleName);
+               if (optionalUserRole.isEmpty()) {
                     return "Role not found with name: " + roleName;
                }
+               UserRole userRole = optionalUserRole.get();
                userRole.setRoleName(dto.getRoleName());
                userRole.setDescription(dto.getDescription());
 
@@ -92,7 +92,6 @@ public class UserRoleService {
                return "Failed to update role. Exception: " + e.getMessage();
           }
      }
-
 
      public String deleteRole(Long id) {
           try {
@@ -107,6 +106,7 @@ public class UserRoleService {
                return "Failed to delete role. Exception: " + e.getMessage();
           }
      }
+
      public boolean accessAuthority(Long userId, String roleName) {
           return userRepository.findById(userId)
                   .map(user -> user.getRoles().stream()

@@ -14,7 +14,7 @@ public class UserDTO {
     private Long id;
 
     @JsonProperty(value = "name", required = true, defaultValue = "<User>")
-    private String name;
+    private String username;
 
     @JsonProperty(value = "email", required = true, defaultValue = "<EMAIL>")
     private String email;

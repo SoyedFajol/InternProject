@@ -50,6 +50,6 @@ public class Blog {
     private List<BlogComment> comments;
 
     private Double rating;
+    @Version
+    private Integer version;
 }
-
-

@@ -21,9 +21,17 @@ public class BlogService {
     }
 
     public void save(BlogDTO blogDTO) {
-        Blog blog = blogMapper.toEntity(blogDTO);
-        blogRepository.save(blog);
+        if (blogDTO.getId() != null && blogDTO.getId() != 0) {
+            throw new IllegalArgumentException("ID should not be provided for a new blog entry.");
+        }
+        try {
+            Blog blog = blogMapper.toEntity(blogDTO);
+            blogRepository.save(blog);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Failed to save blog: " + e.getMessage());
+        }
     }
+
 
     public List<BlogDTO> getAll() {
         List<Blog> blogs = blogRepository.findAll();
@@ -31,6 +39,11 @@ public class BlogService {
                 .map(blogMapper::toDTO)
                 .toList();
     }
+
+    public BlogDTO toDTO(Blog blog) {
+        return blogMapper.toDTO(blog);
+    }
+
 
     public Blog findById(Long id) {
         return blogRepository.findById(id).orElse(null);
