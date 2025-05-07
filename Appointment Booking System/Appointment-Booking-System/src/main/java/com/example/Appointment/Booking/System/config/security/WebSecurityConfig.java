@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.Appointment.Booking.System.repository.UserRepository;
 
@@ -33,14 +32,15 @@ public class WebSecurityConfig {
                     user.getEmail(),
                     user.getPassword(),
                     user.getRoles().stream()
-                            .map(role -> new SimpleGrantedAuthority(role.getName())) // Corrected role extraction
+                            .map(role -> new SimpleGrantedAuthority(role.getName()))
                             .collect(Collectors.toList())
             );
         };
-    }
 
+    }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
 }

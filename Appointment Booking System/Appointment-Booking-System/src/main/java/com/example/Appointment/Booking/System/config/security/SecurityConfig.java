@@ -1,11 +1,12 @@
 package com.example.Appointment.Booking.System.config.security;
 
 import com.example.Appointment.Booking.System.config.Jwt.JwtAuthFilter;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import com.example.Appointment.Booking.System.service.UserDetailsServiceImpl;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
@@ -17,39 +18,37 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
+    public SecurityConfig(JwtAuthFilter jwtAuthFilter, UserDetailsServiceImpl userDetailsServiceImpl) {
         this.jwtAuthFilter = jwtAuthFilter;
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // BCryptPasswordEncoder is widely used for password encoding
+        return new BCryptPasswordEncoder(); // For encoding passwords securely
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless apps
+                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless apps (important for JWT-based authentication)
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll() // Public access
-                        .requestMatchers("/user/**").hasRole("USER") // User role access
-                        .requestMatchers("/doctor/**").hasRole("DOCTOR") // Doctor role access
-                        .anyRequest().authenticated() // All other requests require authentication
+                        .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll() 
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Stateless sessions
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // Stateless session management
                 )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // JWT filter before authentication
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);  // Apply JWT filter before UsernamePasswordAuthenticationFilter
 
         return http.build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    @Primary
+    public UserDetailsService userDetailsService() {
+        return userDetailsServiceImpl;
     }
-
-
 }
-

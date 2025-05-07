@@ -1,5 +1,6 @@
 package com.example.Appointment.Booking.System.config.Jwt;
 
+import com.example.Appointment.Booking.System.exception.InvalidJwtException;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

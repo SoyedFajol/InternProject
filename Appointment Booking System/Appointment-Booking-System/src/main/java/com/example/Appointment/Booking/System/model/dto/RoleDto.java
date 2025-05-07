@@ -1,9 +1,16 @@
 package com.example.Appointment.Booking.System.model.dto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RoleDto {
+
     private Long id;
-    private String name; // "ROLE_USER", "ROLE_DOCTOR"
+    private String name;
 }

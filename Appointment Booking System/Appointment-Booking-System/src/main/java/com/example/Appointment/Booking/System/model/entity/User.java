@@ -1,8 +1,11 @@
 package com.example.Appointment.Booking.System.model.entity;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
